@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useFabric } from '@/hooks/useFabric';
 import { useSyncCanvas } from '@/hooks/useSyncCanvas';
 import { Toolbar } from './Toolbar';
-import { Rect, Circle, IText, PencilBrush } from 'fabric';
+import { Rect, Circle, IText, PencilBrush, Shadow } from 'fabric';
 import { Mode } from '@/types/canvas';
 
 interface CanvasProps {
@@ -93,7 +93,7 @@ export const Canvas = ({ roomId, mode, setMode }: CanvasProps) => {
             strokeWidth: 2,
             rx: 12,
             ry: 12,
-            shadow: 'rgba(0,0,0,0.1) 0px 4px 6px -1px',
+            shadow: new Shadow({ color: 'rgba(0,0,0,0.1)', blur: 6, offsetX: 0, offsetY: 4 }),
           });
           const label = new IText('Concept Name', {
             left: pointer.x + 20,
@@ -156,12 +156,12 @@ export const Canvas = ({ roomId, mode, setMode }: CanvasProps) => {
         strokeWidth: 2,
         rx: 12,
         ry: 12,
-        shadow: {
+        shadow: new Shadow({
           color: 'rgba(0,0,0,0.1)',
           blur: 6,
           offsetX: 0,
           offsetY: 4
-        }
+        })
       });
       const label = new IText('Concept Name', {
         left: left + 20,
