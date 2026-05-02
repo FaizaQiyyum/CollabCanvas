@@ -30,13 +30,13 @@ export const Canvas = ({ roomId, mode, setMode }: CanvasProps) => {
     } else {
       canvas.backgroundColor = '#ffffff';
     }
-    
+
     canvas.renderAll();
 
     // Update canvas settings based on tool
     canvas.isDrawingMode = activeTool === 'pencil';
 
-    
+
     if (activeTool === 'pencil') {
       canvas.freeDrawingBrush = new PencilBrush(canvas);
       canvas.freeDrawingBrush.width = 3;
@@ -109,7 +109,7 @@ export const Canvas = ({ roomId, mode, setMode }: CanvasProps) => {
             width: 160,
             fontFamily: 'Inter, sans-serif',
           });
-          
+
           canvas.add(rect, label, description);
           canvas.setActiveObject(rect);
           setActiveTool('select');
@@ -134,7 +134,7 @@ export const Canvas = ({ roomId, mode, setMode }: CanvasProps) => {
     const handleExternalAddBlock = () => {
       // Create block at center of viewport or next available slot
       const center = canvas.getVpCenter();
-      
+
       let left = center.x - 100;
       let top = center.y - 60;
 
@@ -177,7 +177,7 @@ export const Canvas = ({ roomId, mode, setMode }: CanvasProps) => {
         width: 160,
         fontFamily: 'Inter, sans-serif',
       });
-      
+
       canvas.add(rect, label, description);
       canvas.setActiveObject(rect);
       canvas.renderAll();
@@ -206,6 +206,7 @@ export const Canvas = ({ roomId, mode, setMode }: CanvasProps) => {
       const dataURL = canvas.toDataURL({
         format: 'png',
         quality: 1,
+        multiplier: 1,
       });
       const link = document.createElement('a');
       link.download = `collab-canvas-${roomId}.png`;
@@ -216,9 +217,9 @@ export const Canvas = ({ roomId, mode, setMode }: CanvasProps) => {
 
   return (
     <div className="flex w-full h-full bg-slate-50">
-      <Toolbar 
-        activeTool={activeTool} 
-        setActiveTool={setActiveTool} 
+      <Toolbar
+        activeTool={activeTool}
+        setActiveTool={setActiveTool}
         onClear={handleClear}
         onDownload={handleDownload}
         setMode={setMode}
@@ -242,7 +243,7 @@ export const Canvas = ({ roomId, mode, setMode }: CanvasProps) => {
             }}
             className="text-xs font-bold text-indigo-600 hover:text-indigo-800 transition-colors flex items-center gap-1.5"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
             Invite Students
           </button>
         </div>
